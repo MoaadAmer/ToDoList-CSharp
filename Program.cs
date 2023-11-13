@@ -29,24 +29,10 @@ do
 
             break;
         case "A":
-            string todo;
-            do
-            {
-                Console.WriteLine("Enter the TODO description:");
-                todo = Console.ReadLine();
-                if (string.IsNullOrEmpty(todo))
-                {
-                    Console.WriteLine("the description cannot be empty.");
-                }
-                else if (todos.Contains(todo))
-                {
-                    Console.WriteLine("the description must be unique");
-                }
 
-            }
-            while (string.IsNullOrEmpty(todo) || todos.Contains(todo));
-            todos.Add(todo);
-            Console.WriteLine($"TODO successfully added: {todo}");
+            addTodo();
+
+
             break;
         case "R":
 
@@ -97,3 +83,34 @@ do
 
 
 } while (!exit);
+
+
+
+void addTodo()
+{
+
+
+    bool isValidDescription = false;
+    do
+    {
+        Console.WriteLine("Enter the TODO description:");
+        string todo = Console.ReadLine();
+        if (string.IsNullOrEmpty(todo))
+        {
+            Console.WriteLine("the description cannot be empty.");
+        }
+        else if (todos.Contains(todo))
+        {
+            Console.WriteLine("the description must be unique");
+        }
+        else
+        {
+            isValidDescription = true;
+            todos.Add(todo);
+            Console.WriteLine($"TODO successfully added: {todo}");
+        }
+    }
+
+    while (!isValidDescription);
+
+}
