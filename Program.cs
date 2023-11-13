@@ -14,25 +14,10 @@ do
     switch (userChoice)
     {
         case "S":
-            if (todos.Count > 0)
-            {
-                for (int i = 0; i < todos.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {todos[i]}");
-                }
-                Console.WriteLine();
-            }
-            else
-            {
-                Console.WriteLine("No TODOs have been added yet.");
-            }
-
+            seeAllTodos();
             break;
         case "A":
-
             addTodo();
-
-
             break;
         case "R":
 
@@ -84,7 +69,21 @@ do
 
 } while (!exit);
 
-
+void seeAllTodos()
+{
+    if (todos.Count > 0)
+    {
+        for (int i = 0; i < todos.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {todos[i]}");
+        }
+        Console.WriteLine();
+    }
+    else
+    {
+        Console.WriteLine("No TODOs have been added yet.");
+    }
+}
 
 void addTodo()
 {
