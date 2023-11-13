@@ -20,54 +20,56 @@ do
             addTodo();
             break;
         case "R":
-
-            if (todos.Count > 0)
-            {
-                bool invalidInput = true;
-                int todoIndex = 0;
-                do
-                {
-                    Console.WriteLine("Select the index of the TODO you want to remove:");
-                    for (int i = 0; i < todos.Count; i++)
-                    {
-                        Console.WriteLine($"{i + 1}. {todos[i]}");
-                    }
-                    Console.WriteLine();
-                    string input = Console.ReadLine();
-                    if (string.IsNullOrEmpty(input))
-                    {
-                        Console.WriteLine("Selected index cannot be empty.");
-                    }
-                    else if (!int.TryParse(input, out todoIndex) ||
-                       (int.TryParse(input, out todoIndex) && (todoIndex > todos.Count || todoIndex < 1)))
-                    {
-                        Console.WriteLine("The given index is not valid.");
-                    }
-                    else
-                    {
-                        invalidInput = false;
-                    }
-
-                } while (invalidInput);
-
-                todos.RemoveAt(todoIndex - 1);
-                Console.WriteLine($"to do number {todoIndex} deleted succesfuly.");
-            }
-            else
-            {
-                Console.WriteLine("No TODOs have been added yet.");
-            }
+            RemoveATodo();
             break;
         case "E":
             exit = true;
             break;
         default:
-            Console.WriteLine("Incorrect input");
+            Console.WriteLine("Incorrect input\n");
             break;
     }
 
 
 } while (!exit);
+
+void RemoveATodo()
+{
+    if (todos.Count == 0)
+    {
+        Console.WriteLine("No TODOs have been added yet.\n");
+        return;
+    }
+
+    bool invalidInput = true;
+    do
+    {
+        Console.WriteLine("Select the index of the TODO you want to remove:");
+        seeAllTodos();
+        string input = Console.ReadLine();
+        int todoIndex;
+        if (string.IsNullOrEmpty(input))
+        {
+            Console.WriteLine("Selected index cannot be empty.\n");
+            continue;
+        }
+        else if (int.TryParse(input, out todoIndex) && todoIndex >= 1 && todoIndex <= todos.Count)
+        {
+            invalidInput = false;
+            int realIndex = todoIndex - 1;
+            string toDoToBeRemoved = todos[realIndex];
+            todos.RemoveAt(realIndex);
+            Console.WriteLine($"TODO removed: {toDoToBeRemoved}");
+        }
+        else
+        {
+            Console.WriteLine("The given index is not valid.\n");
+        }
+
+    } while (invalidInput);
+
+
+}
 
 void seeAllTodos()
 {
@@ -81,7 +83,7 @@ void seeAllTodos()
     }
     else
     {
-        Console.WriteLine("No TODOs have been added yet.");
+        Console.WriteLine("No TODOs have been added yet.\n");
     }
 }
 
@@ -96,17 +98,17 @@ void addTodo()
         string todo = Console.ReadLine();
         if (string.IsNullOrEmpty(todo))
         {
-            Console.WriteLine("the description cannot be empty.");
+            Console.WriteLine("the description cannot be empty.\n");
         }
         else if (todos.Contains(todo))
         {
-            Console.WriteLine("the description must be unique");
+            Console.WriteLine("the description must be unique\n");
         }
         else
         {
             isValidDescription = true;
             todos.Add(todo);
-            Console.WriteLine($"TODO successfully added: {todo}");
+            Console.WriteLine($"TODO successfully added: {todo}\n");
         }
     }
 
