@@ -1,4 +1,6 @@
 ﻿bool exit = false;
+
+
 List<string> todos = new List<string>();
 do
 {
@@ -83,7 +85,7 @@ void seeAllTodos()
     }
     else
     {
-        Console.WriteLine("No TODOs have been added yet.\n");
+        showNoTodoMessage();
     }
 }
 
@@ -114,4 +116,10 @@ void addTodo()
 
     while (!isValidDescription);
 
+}
+
+
+void showNoTodoMessage()
+{
+    Console.WriteLine("No TODOs have been added yet.\n");
 }
