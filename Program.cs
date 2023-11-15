@@ -54,19 +54,16 @@ void seeAllTodos()
 }
 void addTodo()
 {
-    bool isValidDescription;
+    string description;
     do
     {
         Console.WriteLine("Enter the TODO description:");
-        string description = Console.ReadLine();
-        isValidDescription = IsDescriptionValid(description);
-        if (isValidDescription)
-        {
-            todos.Add(description);
-            Console.WriteLine($"TODO successfully added: {description}\n");
-        }
+        description = Console.ReadLine();
     }
-    while (!isValidDescription);
+    while (!IsDescriptionValid(description));
+
+    todos.Add(description);
+    Console.WriteLine($"TODO successfully added: {description}\n");
 }
 
 bool IsDescriptionValid(string? description)
