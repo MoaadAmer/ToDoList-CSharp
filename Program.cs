@@ -73,7 +73,7 @@ bool IsDescriptionValid(string? description)
         Console.WriteLine("the description cannot be empty.\n");
         return false;
     }
-    else if (todos.Contains(description))
+    if (todos.Contains(description))
     {
         Console.WriteLine("the description must be unique\n");
         return false;
