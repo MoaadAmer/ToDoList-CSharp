@@ -39,18 +39,16 @@ do
 
 void seeAllTodos()
 {
-    if (todos.Count > 0)
-    {
-        for (int i = 0; i < todos.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {todos[i]}");
-        }
-        Console.WriteLine();
-    }
-    else
+    if (todos.Count == 0)
     {
         showNoTodoMessage();
+        return;
     }
+    for (int i = 0; i < todos.Count; i++)
+    {
+        Console.WriteLine($"{i + 1}. {todos[i]}");
+    }
+    Console.WriteLine();
 }
 void addTodo()
 {
