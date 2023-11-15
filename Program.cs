@@ -35,6 +35,55 @@ do
 
 } while (!exit);
 
+
+
+void seeAllTodos()
+{
+    if (todos.Count > 0)
+    {
+        for (int i = 0; i < todos.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {todos[i]}");
+        }
+        Console.WriteLine();
+    }
+    else
+    {
+        showNoTodoMessage();
+    }
+}
+void addTodo()
+{
+    bool isValidDescription;
+    do
+    {
+        Console.WriteLine("Enter the TODO description:");
+        string description = Console.ReadLine();
+        isValidDescription = IsDescriptionValid(description);
+        if (isValidDescription)
+        {
+            todos.Add(description);
+            Console.WriteLine($"TODO successfully added: {description}\n");
+        }
+    }
+    while (!isValidDescription);
+}
+
+bool IsDescriptionValid(string? description)
+{
+    if (string.IsNullOrEmpty(description))
+    {
+        Console.WriteLine("the description cannot be empty.\n");
+        return false;
+    }
+    else if (todos.Contains(description))
+    {
+        Console.WriteLine("the description must be unique\n");
+        return false;
+    }
+    return true;
+}
+
 void RemoveATodo()
 {
     if (todos.Count == 0)
@@ -72,52 +121,6 @@ void RemoveATodo()
 
 
 }
-
-void seeAllTodos()
-{
-    if (todos.Count > 0)
-    {
-        for (int i = 0; i < todos.Count; i++)
-        {
-            Console.WriteLine($"{i + 1}. {todos[i]}");
-        }
-        Console.WriteLine();
-    }
-    else
-    {
-        showNoTodoMessage();
-    }
-}
-
-void addTodo()
-{
-
-
-    bool isValidDescription = false;
-    do
-    {
-        Console.WriteLine("Enter the TODO description:");
-        string todo = Console.ReadLine();
-        if (string.IsNullOrEmpty(todo))
-        {
-            Console.WriteLine("the description cannot be empty.\n");
-        }
-        else if (todos.Contains(todo))
-        {
-            Console.WriteLine("the description must be unique\n");
-        }
-        else
-        {
-            isValidDescription = true;
-            todos.Add(todo);
-            Console.WriteLine($"TODO successfully added: {todo}\n");
-        }
-    }
-
-    while (!isValidDescription);
-
-}
-
 
 void showNoTodoMessage()
 {
